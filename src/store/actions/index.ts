@@ -1,1 +1,1 @@
-export { REMOVE_MOVIE, SET_MOVIE } from "./movies";
+export { SET_MOVIE } from "./movies";

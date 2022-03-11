@@ -1,47 +1,36 @@
-import React from "react";
-import { Button } from "react-native";
+import React, { useEffect } from "react";
+import { Button, FlatList } from "react-native";
 import { useMovies } from "../../store/hooks/movies";
 import { Container, Title } from "./Styles";
 
-const MOVIES = [
-  {
-    id: 1,
-    title: "The Shawshank Redemption",
-  },
-  {
-    id: 2,
-    title: "The Godfather",
-  },
-  {
-    id: 3,
-    title: "The Godfather: Part II",
-  },
-  {
-    id: 4,
-    title: "The Dark Knight",
-  },
-  {
-    id: 5,
-    title: "The Dark Knight",
-  },
-  {
-    id: 46,
-    title: "The Dark Knight",
-  },
-];
-
 export const HomeScreen = () => {
-  const { movies, setMovie } = useMovies();
-  console.log(movies);
+  const { movies, refleshMovies, teste } = useMovies();
+
+  // console.log("movies", movies);
+
+  const renderItem = ({ item }) => {
+    console.log("item", item.mo);
+    const { title, id } = item.movie;
+    return <Title>{title} </Title>;
+  };
+
   return (
     <Container>
-      <Title>HomeScreen</Title>
-      <Button
-        title="get Movies"
-        onPress={() => console.log("movies -->", movies)}
-      />
+      {/* <Title>HomeScreen</Title>
+      <Button title="get refleshMovies" onPress={() => refleshMovies()} /> */}
 
-      <Button title="set Movies" onPress={() => setMovie(MOVIES)} />
+      {/* <Button
+        title="gTESTE aaaaaa"
+        onPress={() => console.log("MAIS UM CONSOLE -->", movies)}
+      /> */}
+
+      <Button title="gTESTE" onPress={() => teste()} />
+
+      {/* <FlatList
+        data={movies}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.movie.title}
+      /> */}
     </Container>
   );
 };

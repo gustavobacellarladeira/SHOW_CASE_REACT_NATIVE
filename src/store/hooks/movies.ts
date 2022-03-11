@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_MOVIE } from "../actions";
+import { createPromise } from "redux-promise-middleware";
+import { getMovies, promiseTeste } from "../../services/Actions";
+
+import { asyncReducer } from "redux-promise-middleware-actions";
 
 export const useMovies = () => {
   const movies = useSelector((state: any) => state.movies);
@@ -8,23 +12,19 @@ export const useMovies = () => {
   // useDispach wih this hook
   const dispatch = useDispatch();
 
-  // useEffect wih this hook
-  useEffect(() => {
-    // if (moviesData) {
-    //   dispatch({
-    //     type: SET_MOVIE,
-    //     payload: JSON.parse(moviesData),
-    //   });
-    // }
+  const refleshMovies = useCallback(async () => {
+    console.log("refleshMovies");
+    const movie = getMovies();
+    await movie(dispatch);
   }, [dispatch]);
 
-  // useSelector wih this hook
-  const setMovie = (movie: any) => {
-    dispatch({
-      type: SET_MOVIE,
-      payload: movie,
-    });
+  const teste = async () => {
+    dispatch(promiseTeste());
   };
 
-  return { movies, setMovie };
+  // useEffect(() => {
+  //   refleshMovies();
+  // }, [dispatch]);
+
+  return { movies, refleshMovies, teste };
 };
