@@ -14,10 +14,8 @@ export const movieReducer = (
       return (state = { ...state, loading: true });
     case `FETCH_MOVIES_${ActionType.Fulfilled}`:
       return (state = { loading: false, data: action.payload });
-
     case `FETCH_MOVIES_${ActionType.Rejected}`:
       return (state = { data: [], loading: false });
-
     default:
       return state;
   }
