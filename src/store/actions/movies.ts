@@ -1,0 +1,4 @@
+const SET_MOVIE = "SET_MOVIE";
+const REMOVE_MOVIE = "REMOVE_MOVIE";
+
+export { SET_MOVIE, REMOVE_MOVIE };

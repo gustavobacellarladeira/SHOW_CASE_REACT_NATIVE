@@ -1,14 +1,14 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import { Screen1, Screen2 } from "../screens";
+import { HomeScreen, MovieScreen } from "../screens";
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
 export const BottomTabs = () => {
   return (
     <Navigator>
-      <Screen name="Home" component={Screen1} />
-      <Screen name="Settings" component={Screen2} />
+      <Screen name="Home" component={HomeScreen} />
+      <Screen name="Settings" component={MovieScreen} />
     </Navigator>
   );
 };
