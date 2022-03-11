@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, FlatList } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import { useMovies } from "../../store/hooks/movies";
 import { Container, Title } from "./Styles";
 
@@ -7,6 +8,10 @@ export const HomeScreen = () => {
   const { movies, refleshMovies, teste } = useMovies();
 
   // console.log("movies", movies);
+
+  useEffect(() => {
+    console.log("teste movies ", movies);
+  }, [movies]);
 
   const renderItem = ({ item }) => {
     console.log("item", item.mo);
@@ -31,6 +36,8 @@ export const HomeScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.movie.title}
       /> */}
+
+      {movies.loading ? <ActivityIndicator /> : <Title>Carregado</Title>}
     </Container>
   );
 };

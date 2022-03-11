@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_MOVIE } from "../actions";
 import { createPromise } from "redux-promise-middleware";
-import { getMovies, promiseTeste } from "../../services/Actions";
+import { getMovies } from "../../services/Actions";
 
 import { asyncReducer } from "redux-promise-middleware-actions";
 
@@ -12,19 +12,15 @@ export const useMovies = () => {
   // useDispach wih this hook
   const dispatch = useDispatch();
 
-  const refleshMovies = useCallback(async () => {
-    console.log("refleshMovies");
-    const movie = getMovies();
-    await movie(dispatch);
-  }, [dispatch]);
-
-  const teste = async () => {
-    dispatch(promiseTeste());
+  const refleshMovies = async () => {
+    dispatch(getMovies());
   };
 
-  // useEffect(() => {
-  //   refleshMovies();
-  // }, [dispatch]);
+  useEffect(() => {
+    setTimeout(() => {
+      refleshMovies();
+    }, 3000);
+  }, [dispatch]);
 
-  return { movies, refleshMovies, teste };
+  return { movies, refleshMovies };
 };
