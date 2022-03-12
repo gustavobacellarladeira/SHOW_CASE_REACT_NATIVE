@@ -66,7 +66,7 @@ export const SkeletonHorizontal: React.FC<SkeletonHorizontalProps> = ({
 
 const styles = StyleSheet.create({
   loading: {
-    backgroundColor: "grey",
+    backgroundColor: "#333",
     width: "20%",
     height: "100%",
   },

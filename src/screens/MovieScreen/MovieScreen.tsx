@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Skeleton, SkeletonHorizontal } from "../../components";
+import { SkeletonMovieScreen } from "./SkeletonMovieScreen";
 import { Container, Title } from "./Styles";
 
 export const MovieScreen = () => {
@@ -8,13 +9,7 @@ export const MovieScreen = () => {
 
   return (
     <Container>
-      {loading ? <View style={styles.block}></View> : <View />}
-      {/* 
-      <Skeleton variant="box" width="100%" height={200} /> */}
-
-      <View style={{ width: 200, height: 100, backgroundColor: "red" }}>
-        <SkeletonHorizontal width={150} />
-      </View>
+      {loading ? <View style={styles.block}></View> : <SkeletonMovieScreen />}
     </Container>
   );
 };

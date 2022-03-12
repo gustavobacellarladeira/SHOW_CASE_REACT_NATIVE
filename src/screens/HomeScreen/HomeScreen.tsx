@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button, FlatList } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useMovies } from "../../store/hooks/movies";
+import { SkeletonMovieScreen } from "../MovieScreen/SkeletonMovieScreen";
 import { Container, Title } from "./Styles";
 
 export const HomeScreen = () => {
@@ -18,6 +19,10 @@ export const HomeScreen = () => {
     const { title, id } = item.movie;
     return <Title>{title} </Title>;
   };
+
+  if (movies.loading) {
+    return <SkeletonMovieScreen />;
+  }
 
   return (
     <Container>
