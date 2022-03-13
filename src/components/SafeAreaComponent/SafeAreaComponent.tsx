@@ -13,11 +13,11 @@ export const SafeAreaComponent = () => {
     <View
       style={{
         paddingTop: insets.top,
-        backgroundColor: theme.PRIMARY_BACKGROUND_COLOR,
+        backgroundColor: theme.colors.primary,
       }}
     >
       <StatusBar
-        backgroundColor={theme.PRIMARY_BACKGROUND_COLOR}
+        backgroundColor={theme.colors.primary}
         style={theme.mode === "light" ? "dark" : "light"}
       />
     </View>

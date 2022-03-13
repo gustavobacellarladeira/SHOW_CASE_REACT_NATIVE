@@ -1,2 +1,2 @@
-export { HomeScreen } from "./HomeScreen/HomeScreen";
-export { MovieScreen } from "./MovieScreen/MovieScreen";
+export { TrendingScreen } from "./TrendingScreen/TrendingScreen";
+export { PopularScreen } from "./PopularScreen/PopularScreen";

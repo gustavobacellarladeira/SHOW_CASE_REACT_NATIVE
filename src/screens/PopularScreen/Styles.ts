@@ -12,16 +12,21 @@ export const ContainerSection = styled.View`
   justify-content: space-around;
 `;
 export const SectionPrimary = styled.View`
-  height: 30%;
-  background-color: ${(props) => props.theme.PRIMARY_BACKGROUND_COLOR};
+  height: 15%;
+  background-color: ${(props) => props.theme.colors.primary};
+  align-items: center;
+  padding-top: 20px;
+  padding-horizontal: 20px;
+`;
+export const TitleSectionPrimary = styled.Text`
+  color: ${(props) => props.theme.PRIMARY_TEXT_COLOR};
+  font-size: ${(props) => props.theme.FONT_SIZE_TITLE};
+
+  text-align: left;
 `;
 export const SectionSecondary = styled.View`
-  width: 100%;
+  background-color: ${(props) => props.theme.colors.secondary};
   flex: 1;
-  min-height: 160px;
-  margin-bottom: 10px;
-  align-items: center;
-  justify-content: space-around;
 `;
 export const SkeletonContainer = styled.View`
   flex: 1;
@@ -34,11 +39,10 @@ export const SkeletonContainer = styled.View`
   justify-content: center;
   overflow: hidden;
 `;
-export const FlatlistCard = styled.View`
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+export const FlatlistContainer = styled.View`
+  min-width: 100%;
+  min-height: 45px;
+  padding: 10px;
 `;
 export const TitleFlatlistContainer = styled.View`
   align-items: flex-start;

@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMoviesPopular, getMoviesTrending } from "../../services/Actions";
+import {
+  getMoviesPopularApi,
+  getMoviesTrendingApi,
+} from "../../services/movies";
+import { UseMoviesProps } from "./types";
 
 export const useMovies = () => {
   const movies = useSelector((state: any) => state.movies);
@@ -18,11 +23,20 @@ export const useMovies = () => {
     });
   };
 
+  const setMovies = async (where: string, page: number) => {
+    const newMovies =
+      where === "POPULAR"
+        ? await getMoviesPopularApi(page)
+        : await getMoviesTrendingApi(page);
+    const newMoviesList = [...movies.popular, ...newMovies];
+    dispatch({ type: `SET_MOVIES_${where}`, payload: newMoviesList });
+  };
+
   useEffect(() => {
     setTimeout(() => {
       refleshMovies();
     }, 3000);
   }, [dispatch]);
 
-  return { movies, refleshMovies };
+  return { movies, setMovies, refleshMovies } as UseMoviesProps;
 };
