@@ -1,9 +1,7 @@
 import { lightTheme } from "../../theme/light";
 import { SWITCH_THEME } from "./action";
 
-const INITIAL_STATE = {
-  theme: lightTheme,
-};
+const INITIAL_STATE = lightTheme;
 
 export const themeReducer = (
   state = INITIAL_STATE,
@@ -11,7 +9,7 @@ export const themeReducer = (
 ) => {
   switch (action.type) {
     case SWITCH_THEME:
-      return { theme: action.payload };
+      return (state = action.payload);
     default:
       return state;
   }

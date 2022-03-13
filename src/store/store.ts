@@ -4,7 +4,7 @@ import promiseMiddleware from "redux-promise-middleware";
 import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 
-applyMiddleware(promiseMiddleware)(createStore);
+applyMiddleware(promiseMiddleware, thunk)(createStore);
 
 const store = createStore(reducer, {}, applyMiddleware(promise));
 export { store };

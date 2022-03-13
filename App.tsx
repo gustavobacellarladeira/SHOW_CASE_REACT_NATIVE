@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes } from "./src/routes/Routes";
-import { useColorScheme } from "react-native";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
@@ -10,23 +9,31 @@ import { SafeAreaComponent } from "./src/components";
 import { Provider, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { store } from "./src/store";
+import { useThemeRedux } from "./src/store/theme/hook";
 
-import { darkTheme, lightTheme } from "./src/theme";
 export default function App() {
-  // const ThemeInjector = ({ children }: { children: React.ReactNode }) => {
-  //   const theme = useSelector((state: any) => state.theme);
+  const ThemeInjector = ({ children }: { children: React.ReactNode }) => {
+    const { theme, setInitialTheme } = useThemeRedux();
 
-  //   return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>;
-  // };
+    useEffect(() => {
+      setInitialTheme();
+      return () => {
+        console.log("unmount");
+        setInitialTheme();
+      };
+    }, []);
+
+    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  };
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <Provider store={store}>
-        {/* <ThemeInjector> */}
-        <SafeAreaComponent />
-        <StatusBar style="auto" />
-        <Routes />
-        {/* </ThemeInjector> */}
+        <ThemeInjector>
+          <SafeAreaComponent />
+          <StatusBar style="auto" />
+          <Routes />
+        </ThemeInjector>
       </Provider>
     </SafeAreaProvider>
   );

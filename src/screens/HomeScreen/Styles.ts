@@ -12,6 +12,7 @@ export const ContainerSection = styled.View`
 `;
 export const SectionPrimary = styled.View`
   height: 30%;
+  background-color: ${(props) => props.theme.PRIMARY_BACKGROUND_COLOR};
 `;
 export const SectionSecondary = styled.View`
   width: 100%;

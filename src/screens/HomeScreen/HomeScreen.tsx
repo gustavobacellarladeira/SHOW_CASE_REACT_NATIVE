@@ -10,30 +10,13 @@ import {
   SkeletonContainer,
   TitleFlatlistContainer,
 } from "./Styles";
-import { Skeleton } from "../../components";
 
-import { ThemeProvider } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { switchTheme } from "../../redux/themeActions";
-import { lightTheme, darkTheme } from "../../theme";
 import { useThemeRedux } from "../../store/theme/hook";
+import { useTheme } from "styled-components";
+import { ThemeProps } from "../../theme/types";
 
 export const HomeScreen = () => {
-  const { theme, useSwitchTheme } = useThemeRedux();
-  // const theme = useSelector((state: any) => state.themeReducer.theme);
-  // const dispatch = useDispatch();
-
-  // const setTheme = () => {
-  //   const currentlyTheme = theme.mode;
-  //   console.log("currentlyTheme", currentlyTheme);
-
-  //   if (currentlyTheme === "light") {
-  //     dispatch(switchTheme(darkTheme));
-  //   }
-  //   if (currentlyTheme === "dark") {
-  //     dispatch(switchTheme(lightTheme));
-  //   }
-  // };
+  const { useSwitchTheme } = useThemeRedux();
 
   const skeletonList = () => {
     return (
