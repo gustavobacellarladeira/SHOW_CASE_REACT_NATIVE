@@ -12,11 +12,15 @@ import {
 } from "./Styles";
 
 import { useThemeRedux } from "../../store/theme/hook";
-import { useTheme } from "styled-components";
-import { ThemeProps } from "../../theme/types";
+import { useMovies } from "../../store/movies/hook";
 
 export const HomeScreen = () => {
   const { useSwitchTheme } = useThemeRedux();
+  const { movies, refleshMovies } = useMovies();
+  useEffect(() => {
+    console.log("HomeScreen");
+    console.log("movies -->", movies);
+  }, [movies]);
 
   const skeletonList = () => {
     return (
@@ -50,6 +54,7 @@ export const HomeScreen = () => {
         <Text> Primary </Text>
 
         <Button title="Change Theme" onPress={() => useSwitchTheme()} />
+        <Button title="Change Theme" onPress={() => refleshMovies()} />
       </SectionPrimary>
       {/* LISTAS DE FILMES */}
       <ContainerSection>
