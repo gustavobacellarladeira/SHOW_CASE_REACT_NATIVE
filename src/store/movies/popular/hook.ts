@@ -4,10 +4,9 @@ import { getMoviesPopular } from "../../../services/Actions";
 import { getMoviesPopularApi } from "../../../services/movies";
 
 export const useMoviesPopular = () => {
-  const moviesPopular = useSelector((state: any) => state.movies.popular);
-  const loadingMoviesPopular = useSelector(
-    (state: any) => state.movies.loading
-  );
+  const moviesPopular = useSelector((state: any) => state.popular);
+  const loadingMoviesPopular = moviesPopular.loading;
+  const moviesName = moviesPopular.name;
 
   const dispatch = useDispatch();
 
@@ -32,7 +31,8 @@ export const useMoviesPopular = () => {
   }, [dispatch]);
 
   return {
-    moviesPopular,
+    moviesName,
+    moviesPopular: moviesPopular.popular,
     setMoviesPopular,
     refleshMoviesPopular,
     loadingMoviesPopular,

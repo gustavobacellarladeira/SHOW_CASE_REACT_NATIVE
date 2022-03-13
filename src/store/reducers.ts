@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 import { themeReducer } from "./theme/reducer";
-import { movieReducer } from "./movies/reducer";
+import { moviePopularReducer, movieTrendingReducer } from "./movies/index";
 
 export const reducer = combineReducers({
-  movies: movieReducer,
+  popular: moviePopularReducer,
+  trending: movieTrendingReducer,
   theme: themeReducer,
 });

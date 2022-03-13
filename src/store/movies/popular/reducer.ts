@@ -1,6 +1,7 @@
 import { ActionType } from "redux-promise-middleware";
 
 const INITIAL_STATE = <any>{
+  name: "Popular",
   loading: true,
   popular: [] as any[],
 };

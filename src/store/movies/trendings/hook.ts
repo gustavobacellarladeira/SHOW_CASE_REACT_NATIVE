@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMoviesTrending } from "../../../services/Actions";
 import { getMoviesTrendingApi } from "../../../services/movies";
 
-export const useMovies = () => {
-  const moviesTrending = useSelector((state: any) => state.movies);
-  const loadingMoviesTrending = useSelector((state: any) => state.loading);
+export const useMoviesTrending = () => {
+  const moviesTrending = useSelector((state: any) => state.trending);
+  const loadingMoviesTrending = moviesTrending.loading;
+  const moviesName = moviesTrending.name;
 
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ export const useMovies = () => {
 
   const setMoviesTrending = async (page: number) => {
     const newMovies = await getMoviesTrendingApi(page);
-    const newMoviesList = [...moviesTrending.popular, ...newMovies];
+    const newMoviesList = [...moviesTrending.trending, ...newMovies];
     dispatch({ type: "SET_MOVIES_TRENDING", payload: newMoviesList });
   };
 
@@ -30,7 +31,8 @@ export const useMovies = () => {
   }, [dispatch]);
 
   return {
-    moviesTrending,
+    moviesName,
+    moviesTrending: moviesTrending.trending,
     setMoviesTrending,
     refleshMoviesTrending,
     loadingMoviesTrending,

@@ -19,37 +19,42 @@ import {
   TitleSectionPrimary,
 } from "./Styles";
 
-import { useMovies } from "../../store/movies/hook";
 import { Skeleton } from "../../components";
-
-const LIMIT = 200;
-let WHERE = "POPULAR";
+import { useMoviesPopular } from "../../store/movies/popular/hook";
+import { LIMIT_MOVIES } from "../../constants/movies";
 
 export const PopularScreen = () => {
-  const { movies, setMovies } = useMovies();
+  const { moviesPopular, loadingMoviesPopular, setMoviesPopular } =
+    useMoviesPopular();
   const [page, setPage] = useState<number>(1);
   const [isEndList, setIsEndList] = useState<boolean>(false);
 
-  const handlerLoadMoreMovies = useCallback(() => {
+  useEffect(() => {
+    console.log("popular -->", moviesPopular.length);
+    console.log("loadingMoviesPopular -->", loadingMoviesPopular);
+  }, [loadingMoviesPopular]);
+
+  const handlerLoadMorePopularMovies = useCallback(() => {
+    let moviesLength = moviesPopular.length;
     // falta uma variavel na api para saber se tem mais para loading ou nao...
     // por isso irei colocar um maximo no length de movies.popular
-    if (movies.popular.length >= LIMIT) {
+    if (moviesLength >= LIMIT_MOVIES) {
       console.log("Não há mais filmes para carregar");
       setIsEndList(true);
       return;
     } else {
-      setMovies(WHERE, page + 1);
+      setMoviesPopular(page + 1);
       setPage(page + 1);
     }
-  }, [WHERE, page, setMovies, movies.popular.length, setIsEndList]);
+  }, [page, setPage, moviesPopular.length, setIsEndList]);
 
   return (
     <Container>
       {/* CABEÇALHO DO CONTEÚDO */}
       <SectionPrimary>
-        <TitleSectionPrimary>lista de filmes {WHERE}</TitleSectionPrimary>
+        <TitleSectionPrimary>lista de filmes </TitleSectionPrimary>
       </SectionPrimary>
-      {/* LISTAS DE FILMES */}
+      {/* LISTAS DE FILMES
       <SectionSecondary>
         <FlatList
           style={{}}
@@ -98,7 +103,7 @@ export const PopularScreen = () => {
             </Text>
           }
         />
-      </SectionSecondary>
+      </SectionSecondary> */}
     </Container>
   );
 };

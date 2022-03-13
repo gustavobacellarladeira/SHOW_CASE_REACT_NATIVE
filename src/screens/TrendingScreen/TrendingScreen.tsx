@@ -19,34 +19,36 @@ import {
   TitleSectionPrimary,
 } from "./Styles";
 
-import { useMovies } from "../../store/movies/hook";
-
 import { Skeleton } from "../../components";
+import { useMoviesTrending } from "../../store/movies/trendings/hook";
+import { LIMIT_MOVIES } from "../../constants/movies";
 
 const LIMIT = 200;
 let WHERE = "TRENDING";
 
 export const TrendingScreen = () => {
-  const { movies, setMovies } = useMovies();
+  const { moviesTrending, loadingMoviesTrending, setMoviesTrending } =
+    useMoviesTrending();
   const [page, setPage] = useState<number>(1);
   const [isEndList, setIsEndList] = useState<boolean>(false);
-
   useEffect(() => {
-    console.log("is loading", movies.trending.length);
-  }, [movies]);
+    console.log("moviesTrending -->", moviesTrending.length);
+    console.log("loadingMoviesTrending -->", loadingMoviesTrending);
+  }, [loadingMoviesTrending]);
 
-  const handlerLoadMoreMovies = useCallback(() => {
+  const handlerLoadMorePopularMovies = useCallback(() => {
+    let moviesLength = moviesTrending.length;
     // falta uma variavel na api para saber se tem mais para loading ou nao...
-    // por isso irei colocar um maximo no length de movies.trending
-    if (movies.trending.length >= LIMIT) {
+    // por isso irei colocar um maximo no length de movies.popular
+    if (moviesLength >= LIMIT_MOVIES) {
       console.log("Não há mais filmes para carregar");
       setIsEndList(true);
       return;
     } else {
-      setMovies(WHERE, page + 1);
+      setMoviesTrending(page + 1);
       setPage(page + 1);
     }
-  }, [WHERE, page, setMovies, movies.trending.length, setIsEndList]);
+  }, []);
 
   return (
     <Container>
@@ -55,7 +57,7 @@ export const TrendingScreen = () => {
         <TitleSectionPrimary>lista de filmes {WHERE}</TitleSectionPrimary>
       </SectionPrimary>
       {/* LISTAS DE FILMES */}
-      <SectionSecondary>
+      {/* <SectionSecondary>
         <FlatList
           style={{}}
           contentContainerStyle={{}}
@@ -103,7 +105,7 @@ export const TrendingScreen = () => {
             </Text>
           }
         />
-      </SectionSecondary>
+      </SectionSecondary> */}
     </Container>
   );
 };
