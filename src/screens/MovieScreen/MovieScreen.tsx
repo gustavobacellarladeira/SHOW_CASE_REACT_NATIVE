@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Skeleton, SkeletonHorizontal } from "../../components";
-import { SkeletonMovieScreen } from "./SkeletonMovieScreen";
+import { SkeletonMovieScreen } from "../../components/Skeleton/SkeletonMovieScreen";
 import { Container, Title } from "./Styles";
 
 export const MovieScreen = () => {
