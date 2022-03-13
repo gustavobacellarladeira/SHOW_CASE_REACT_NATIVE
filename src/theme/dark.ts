@@ -18,6 +18,6 @@ export const darkTheme: ThemeProps = {
   tabBottomBar: {
     backgroundColor: "#333",
     focused: "#D65A31",
-    inactive: "red",
+    inactive: "#ffffff",
   },
 };

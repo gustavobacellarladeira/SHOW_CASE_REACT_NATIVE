@@ -12,30 +12,35 @@ export const BottomTabs = () => {
   return (
     <Navigator
       barStyle={{ backgroundColor: theme.tabBottomBar.backgroundColor }}
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          const iconColor = focused
-            ? theme.tabBottomBar.focused
-            : theme.tabBottomBar.inactive;
-
-          if (route.name === "Popular") {
+      activeColor={theme.tabBottomBar.focused}
+      inactiveColor={theme.tabBottomBar.inactive}
+    >
+      <Screen
+        name="Popular"
+        component={PopularScreen}
+        options={{
+          tabBarLabel: "Popular",
+          tabBarIcon: ({ focused, color, size }) => {
             return (
               <MaterialCommunityIcons
                 name={"movie-edit"}
                 size={24}
-                color={iconColor}
+                color={color}
               />
             );
-          } else if (route.name === "Profile") {
-            return <FontAwesome5 name={"user"} size={24} color={iconColor} />;
-          }
-        },
-        tabBarInactiveTintColor: theme.tabBottomBar.inactive,
-        tabBarActiveTintColor: theme.tabBottomBar.focused,
-      })}
-    >
-      <Screen name="Popular" component={PopularScreen} />
-      <Screen name="Profile" component={MovieScreen} />
+          },
+        }}
+      />
+      <Screen
+        name="Profile"
+        component={MovieScreen}
+        options={{
+          tabBarLabel: "Popular",
+          tabBarIcon: ({ focused, color, size }) => {
+            return <FontAwesome5 name={"user"} size={24} color={color} />;
+          },
+        }}
+      />
     </Navigator>
   );
 };
