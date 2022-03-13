@@ -13,20 +13,28 @@ import {
 
 import { useThemeRedux } from "../../store/theme/hook";
 import { useMovies } from "../../store/movies/hook";
+import { MovieListProps } from "./types";
 
 export const HomeScreen = () => {
   const { useSwitchTheme } = useThemeRedux();
   const { movies, refleshMovies } = useMovies();
   useEffect(() => {
     console.log("HomeScreen");
-    console.log("movies -->", movies);
+    console.log("trending -->", movies.trending.length);
+    console.log("popular -->", movies.popular.length);
   }, [movies]);
 
-  const skeletonList = () => {
+  if (movies.loading) {
+    return <SkeletonMovieScreen />;
+  }
+
+  const movieList = (props: MovieListProps) => {
+    const { loading, movies, name } = props;
+
     return (
       <SectionSecondary>
         <TitleFlatlistContainer>
-          <Text>Title</Text>
+          <Text>{name}</Text>
         </TitleFlatlistContainer>
         <FlatList
           showsHorizontalScrollIndicator={false}
@@ -58,8 +66,12 @@ export const HomeScreen = () => {
       </SectionPrimary>
       {/* LISTAS DE FILMES */}
       <ContainerSection>
-        {skeletonList()}
-        {skeletonList()}
+        {movieList({
+          loading: true,
+          movies: movies.trending,
+          name: "Trending",
+        })}
+        {movieList({ loading: true, movies: movies.popular, name: "Popular" })}
       </ContainerSection>
     </Container>
   );

@@ -2,7 +2,8 @@ import { ActionType } from "redux-promise-middleware";
 
 const INITIAL_STATE = <any>{
   loading: true,
-  data: [],
+  trending: [],
+  popular: [],
 };
 
 export const movieReducer = (
@@ -10,12 +11,25 @@ export const movieReducer = (
   action: { type: any; payload: { id: any } }
 ) => {
   switch (action.type) {
-    case `FETCH_MOVIES_${ActionType.Pending}`:
-      return (state = { ...state, loading: true });
-    case `FETCH_MOVIES_${ActionType.Fulfilled}`:
-      return (state = { loading: false, data: action.payload });
-    case `FETCH_MOVIES_${ActionType.Rejected}`:
-      return (state = { data: [], loading: false });
+    // trending
+    case `FETCH_MOVIES_TRENDING_${ActionType.Pending}`:
+      return (state = { ...state });
+    case `FETCH_MOVIES_TRENDING_${ActionType.Fulfilled}`:
+      return (state = { ...state, trending: action.payload });
+    case `FETCH_MOVIES_TRENDING_${ActionType.Rejected}`:
+      return (state = { ...state });
+
+    // popular
+    case `FETCH_MOVIES_POPULAR_${ActionType.Pending}`:
+      return (state = { ...state });
+    case `FETCH_MOVIES_POPULAR_${ActionType.Fulfilled}`:
+      return (state = { ...state, popular: action.payload });
+    case `FETCH_MOVIES_POPULAR_${ActionType.Rejected}`:
+      return (state = { ...state });
+
+    case "SET_LOADING":
+      return (state = { ...state, loading: action.payload });
+
     default:
       return state;
   }
