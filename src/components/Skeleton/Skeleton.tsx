@@ -13,7 +13,6 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const AnimatedValueOpacity = useRef(new Animated.Value(0.2)).current;
 
   useEffect(() => {
-    console.log("Skeleton useEffect called !!! *** !!!");
     Animated.loop(
       Animated.sequence([
         Animated.timing(AnimatedValueOpacity, {

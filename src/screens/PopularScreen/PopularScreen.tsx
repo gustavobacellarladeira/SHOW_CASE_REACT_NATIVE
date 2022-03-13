@@ -20,56 +20,52 @@ import {
 } from "./Styles";
 
 import { Skeleton } from "../../components";
-import { useMoviesPopular } from "../../store/movies/popular/hook";
-import { LIMIT_MOVIES } from "../../constants/movies";
+import { useMovies } from "../../store/movies/hook";
+import { FAKE_MOVIES, LIMIT_MOVIES } from "../../constants/movies";
 
 export const PopularScreen = () => {
-  const { moviesPopular, loadingMoviesPopular, setMoviesPopular } =
-    useMoviesPopular();
+  const { movies, loadingMovies, moviesName, refleshMovies } = useMovies();
   const [page, setPage] = useState<number>(1);
   const [isEndList, setIsEndList] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("popular -->", moviesPopular.length);
-    console.log("loadingMoviesPopular -->", loadingMoviesPopular);
-  }, [loadingMoviesPopular]);
+    console.log("Movies -->", movies.length);
+    console.log("loadingMoviesMovies -->", loadingMovies);
+  }, [loadingMovies]);
+
+  useEffect(() => {
+    console.log("Movies -->", movies.length);
+  }, [movies.length]);
 
   const handlerLoadMorePopularMovies = useCallback(() => {
-    let moviesLength = moviesPopular.length;
+    let moviesLength = movies.length;
     // falta uma variavel na api para saber se tem mais para loading ou nao...
-    // por isso irei colocar um maximo no length de movies.popular
+    // por isso irei colocar um maximo no length de movies
     if (moviesLength >= LIMIT_MOVIES) {
       console.log("Não há mais filmes para carregar");
       setIsEndList(true);
       return;
     } else {
-      setMoviesPopular(page + 1);
-      setPage(page + 1);
+      refleshMovies(page + 1);
+      setPage((prev) => prev + 1);
     }
-  }, [page, setPage, moviesPopular.length, setIsEndList]);
+  }, [page, refleshMovies, movies.length]);
 
   return (
     <Container>
       {/* CABEÇALHO DO CONTEÚDO */}
       <SectionPrimary>
-        <TitleSectionPrimary>lista de filmes </TitleSectionPrimary>
+        <TitleSectionPrimary>Lista de filmes {moviesName}</TitleSectionPrimary>
       </SectionPrimary>
-      {/* LISTAS DE FILMES
+      {/* LISTAS DE FILMES */}
       <SectionSecondary>
         <FlatList
           style={{}}
           contentContainerStyle={{}}
-          data={
-            !movies.loading
-              ? movies.popular
-              : [
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                  19, 20,
-                ]
-          }
+          data={loadingMovies ? FAKE_MOVIES : movies}
           renderItem={({ item }) => (
             <FlatlistContainer>
-              {movies.loading ? (
+              {loadingMovies ? (
                 <Skeleton borderRadius={5} />
               ) : (
                 <TitleSectionPrimary> {item.title} </TitleSectionPrimary>
@@ -77,33 +73,26 @@ export const PopularScreen = () => {
             </FlatlistContainer>
           )}
           keyExtractor={(item) =>
-            !movies.loading ? item.title : item.toString()
+            loadingMovies ? item.toString() : item.ids.slug || item.title
           }
-          onEndReached={handlerLoadMoreMovies}
+          onEndReached={handlerLoadMorePopularMovies}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
-            movies.loading ? (
-              <View>
-                <ActivityIndicator size="large" color="red" />
-              </View>
+            loadingMovies ? (
+              <View></View>
             ) : (
               <>{isEndList && <Text>Não há mais filmes para carregar</Text>}</>
             )
           }
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
-          windowSize={10}
-          updateCellsBatchingPeriod={100}
-          removeClippedSubviews={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           ListEmptyComponent={
             <Text>
-              {movies.loading ? "Carregando..." : "Nenhum filme encontrado"}
+              {loadingMovies ? "Carregando..." : "Nenhum filme encontrado"}
             </Text>
           }
         />
-      </SectionSecondary> */}
+      </SectionSecondary>
     </Container>
   );
 };

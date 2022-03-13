@@ -12,11 +12,11 @@ export const ContainerSection = styled.View`
   justify-content: space-around;
 `;
 export const SectionPrimary = styled.View`
-  height: 15%;
+  height: 10%;
   background-color: ${(props) => props.theme.colors.primary};
   align-items: center;
-  padding-top: 20px;
-  padding-horizontal: 20px;
+
+  justify-content: center;
 `;
 export const TitleSectionPrimary = styled.Text`
   color: ${(props) => props.theme.PRIMARY_TEXT_COLOR};

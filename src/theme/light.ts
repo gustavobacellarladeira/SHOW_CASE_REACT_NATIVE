@@ -15,4 +15,10 @@ export const lightTheme: ThemeProps = {
     secondary: "#f3f3f3",
     tertiary: "#D65A31",
   },
+
+  tabBottomBar: {
+    backgroundColor: "#ffffff",
+    focused: "#D65A31",
+    inactive: "#333",
+  },
 };
