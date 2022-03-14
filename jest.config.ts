@@ -1,13 +1,12 @@
 import type { Config } from "@jest/types";
 
-// Sync object
-const config: Config.InitialOptions = {
-  preset: "ts-jest",
-  testEnvironment: "node",
-  globals: {
-    "ts-jest": {
-      babelConfig: true,
-    },
-  },
+// Or async function
+export default async (): Promise<Config.InitialOptions> => {
+  return {
+    verbose: true,
+    preset: "jest-expo",
+    transformIgnorePatterns: [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)",
+    ],
+  };
 };
-export default config;

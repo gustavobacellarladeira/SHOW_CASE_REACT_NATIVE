@@ -1,6 +1,6 @@
-import { ThemeProps } from "./types";
+import { DefaultTheme } from "styled-components";
 
-export const lightTheme: ThemeProps = {
+export const lightTheme: DefaultTheme = {
   mode: "light",
   PRIMARY_BACKGROUND_COLOR: "#ffffff",
   PRIMARY_TEXT_COLOR: "#333333",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch } from "react-native";
+import { Switch, Text } from "react-native";
 import { useTheme } from "styled-components";
 import { useThemeRedux } from "../../store/theme/hook";
 import {
@@ -12,7 +12,7 @@ import {
 export const ThemeScreen = () => {
   const theme = useTheme();
   const { useSwitchTheme } = useThemeRedux();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const toggleSwitch = () => {
     useSwitchTheme();
     setIsEnabled((previousState) => !previousState);
@@ -27,6 +27,7 @@ export const ThemeScreen = () => {
       <SectionSecondary>
         <TitleSectionPrimary>Change Theme</TitleSectionPrimary>
 
+        <Text testID="isEnabled">{isEnabled}</Text>
         <Switch
           trackColor={{
             false: theme.colors.primary,

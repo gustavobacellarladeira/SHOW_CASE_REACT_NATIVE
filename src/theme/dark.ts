@@ -1,6 +1,6 @@
-import { ThemeProps } from "./types";
+import { DefaultTheme } from "styled-components";
 
-export const darkTheme: ThemeProps = {
+export const darkTheme: DefaultTheme = {
   mode: "dark",
   PRIMARY_BACKGROUND_COLOR: "#333333",
   PRIMARY_TEXT_COLOR: "#ffffff",
