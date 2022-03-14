@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Button,
   FlatList,
+  Image,
   Text,
   TouchableOpacity,
   View,
@@ -11,10 +12,18 @@ import {
 import {
   Container,
   ContainerSection,
+  EmptyList,
+  EmptyListText,
+  EndList,
+  EndLisText,
+  EndListText,
+  FlatListCard,
   FlatlistContainer,
+  ImageContainer,
   SectionPrimary,
   SectionSecondary,
   SkeletonContainer,
+  TitleFlatlist,
   TitleFlatlistContainer,
   TitleSectionPrimary,
 } from "./Styles";
@@ -22,6 +31,7 @@ import {
 import { Skeleton } from "../../components";
 import { useMovies } from "../../store/movies/hook";
 import { FAKE_MOVIES, LIMIT_MOVIES } from "../../constants/movies";
+import { getImage } from "../../services/images/images";
 
 export const PopularScreen = () => {
   const { popular, loadingMovies, getPopularMovies } = useMovies();
@@ -51,13 +61,54 @@ export const PopularScreen = () => {
     }
   }, [page, getPopularMovies, popular.length]);
 
+  const renderItem = ({ item, index }) => {
+    return (
+      <FlatlistContainer>
+        {loadingMovies ? (
+          <Skeleton borderRadius={5} />
+        ) : (
+          <FlatListCard>
+            <TitleFlatlist>
+              {index} - {item.title}
+            </TitleFlatlist>
+          </FlatListCard>
+        )}
+      </FlatlistContainer>
+    );
+  };
+
+  const renderEndList = () => {
+    if (isEndList) {
+      return (
+        <EndList>
+          <EndListText>Não há mais filmes para carregar</EndListText>
+        </EndList>
+      );
+    }
+    return <ActivityIndicator size="large" color={"D65A31"} />;
+  };
+
+  const renderEmptyComponent = () => {
+    return (
+      <EmptyList>
+        {loadingMovies ? (
+          <Skeleton />
+        ) : (
+          <EmptyListText>Não há filmes para carregar</EmptyListText>
+        )}
+      </EmptyList>
+    );
+  };
+
+  const renderKeyExtractor = (item: any, index: number) => {
+    return loadingMovies ? item.toString() : item.ids.slug + item.ids.trakt;
+  };
+
   return (
     <Container>
       {/* CABEÇALHO DO CONTEÚDO */}
       <SectionPrimary>
-        <TitleSectionPrimary>Lista de filmes </TitleSectionPrimary>
-        <Button title="Popular" onPress={() => {}} />
-        <Button title="Trending" onPress={() => {}} />
+        <TitleSectionPrimary>Popular Movies</TitleSectionPrimary>
       </SectionPrimary>
       {/* LISTAS DE FILMES */}
       <SectionSecondary>
@@ -65,34 +116,14 @@ export const PopularScreen = () => {
           style={{}}
           contentContainerStyle={{}}
           data={loadingMovies ? FAKE_MOVIES : popular}
-          renderItem={({ item }) => (
-            <FlatlistContainer>
-              {loadingMovies ? (
-                <Skeleton borderRadius={5} />
-              ) : (
-                <TitleSectionPrimary> {item.title} </TitleSectionPrimary>
-              )}
-            </FlatlistContainer>
-          )}
-          keyExtractor={(item) =>
-            loadingMovies ? item.toString() : item.ids.slug + item.ids.trakt
-          }
+          renderItem={renderItem}
+          keyExtractor={renderKeyExtractor}
           onEndReached={handlerLoadMorePopularMovies}
           onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            loadingMovies ? (
-              <View></View>
-            ) : (
-              <>{isEndList && <Text>Não há mais filmes para carregar</Text>}</>
-            )
-          }
+          ListFooterComponent={popular.length !== 0 && renderEndList}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          ListEmptyComponent={
-            <Text>
-              {loadingMovies ? "Carregando..." : "Nenhum filme encontrado"}
-            </Text>
-          }
+          ListEmptyComponent={renderEmptyComponent}
         />
       </SectionSecondary>
     </Container>

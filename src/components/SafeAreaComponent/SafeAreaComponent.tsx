@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View } from "react-native";
+import { View, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 import type { ThemeProps } from "../../theme/types";
@@ -18,7 +17,7 @@ export const SafeAreaComponent = () => {
     >
       <StatusBar
         backgroundColor={theme.colors.primary}
-        style={theme.mode === "light" ? "dark" : "light"}
+        barStyle={theme.mode === "light" ? "dark-content" : "light-content"}
       />
     </View>
   );

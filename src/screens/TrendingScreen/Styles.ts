@@ -44,9 +44,44 @@ export const FlatlistContainer = styled.View`
   min-height: 45px;
   padding: 10px;
 `;
+
+export const FlatListCard = styled.View`
+  background-color: ${(props) => props.theme.colors.primary};
+  border-radius: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
 export const TitleFlatlistContainer = styled.View`
   align-items: flex-start;
   margin: 10px;
   width: 45%;
   height: 20px;
+`;
+export const EndList = styled.View`
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.colors.tertiary};
+  padding: 30px;
+`;
+export const EndListText = styled.Text`
+  color: ${(props) => props.theme.colors.primary};
+  font-size: ${(props) => props.theme.fonts.size};
+  text-align: center;
+`;
+
+export const EmptyList = styled.View`
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.colors.secondary};
+  padding: 30px;
+`;
+
+export const EmptyListText = styled.Text`
+  color: ${(props) => props.theme.PRIMARY_TEXT_COLOR};
+
+  font-size: ${(props) => props.theme.fonts.size};
+  text-align: center;
 `;

@@ -1,3 +1,3 @@
 export { PopularScreen } from "./PopularScreen/PopularScreen";
-export { MovieScreen } from "./MovieScreen/MovieScreen";
+export { ThemeScreen } from "./ThemeScreen/ThemeScreen";
 export { TrendingScreen } from "./TrendingScreen/TrendingScreen";

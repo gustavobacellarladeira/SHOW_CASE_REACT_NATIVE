@@ -5,7 +5,7 @@ export const darkTheme: ThemeProps = {
   PRIMARY_BACKGROUND_COLOR: "#333333",
   PRIMARY_TEXT_COLOR: "#ffffff",
   FONT_SIZE_TITLE: "20px",
-  fonst: {
+  fonts: {
     color: "#ffffff",
     size: "20px",
   },

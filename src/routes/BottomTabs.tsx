@@ -1,7 +1,7 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import { PopularScreen, MovieScreen, TrendingScreen } from "../screens";
+import { PopularScreen, ThemeScreen, TrendingScreen } from "../screens";
 import {
   MaterialCommunityIcons,
   FontAwesome5,
@@ -46,10 +46,10 @@ export const BottomTabs = () => {
         }}
       />
       <Screen
-        name="Profile"
-        component={MovieScreen}
+        name="Theme"
+        component={ThemeScreen}
         options={{
-          tabBarLabel: "Popular",
+          tabBarLabel: "Theme",
           tabBarIcon: ({ focused, color, size }) => {
             return <FontAwesome5 name={"user"} size={24} color={color} />;
           },

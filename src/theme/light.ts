@@ -5,7 +5,7 @@ export const lightTheme: ThemeProps = {
   PRIMARY_BACKGROUND_COLOR: "#ffffff",
   PRIMARY_TEXT_COLOR: "#333333",
   FONT_SIZE_TITLE: "20px",
-  fonst: {
+  fonts: {
     color: "#333333",
     size: "20px",
   },
