@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import "jest-styled-components";
 
 export const Container = styled.View`
   flex: 1;
