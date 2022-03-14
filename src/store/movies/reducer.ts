@@ -2,7 +2,6 @@ import { ActionType } from "redux-promise-middleware";
 import {
   POPULAR_ACTON,
   SET_LOADING,
-  SET_MOVIES,
   SET_MOVIES_NAME,
   TRENDING_ACTON,
 } from "./actions";
@@ -19,12 +18,7 @@ export const movieReducer = (
   state = INITIAL_STATE,
   action: { type: any; payload: { id: any } }
 ) => {
-  // console.log("movieReducer", action);
-
   switch (action.type) {
-    case SET_MOVIES:
-      return { ...state, movies: action.payload };
-
     case SET_LOADING:
       return { ...state, loading: action.payload };
 

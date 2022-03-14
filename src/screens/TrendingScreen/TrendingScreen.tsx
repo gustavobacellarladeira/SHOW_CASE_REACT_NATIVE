@@ -24,21 +24,27 @@ import { useMovies } from "../../store/movies/hook";
 import { FAKE_MOVIES, LIMIT_MOVIES } from "../../constants/movies";
 
 export const TrendingScreen = () => {
-  const { movies, loadingMovies, moviesName, getPopularMovies } = useMovies();
+  const { trending, loadingMovies, getTrendingMovies } = useMovies();
   const [page, setPage] = useState<number>(1);
   const [isEndList, setIsEndList] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("Movies -->", movies.length);
-    console.log("loadingMoviesMovies -->", loadingMovies);
+    if (trending.length === 0) {
+      getTrendingMovies(page);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("trending -->", trending.length);
+    console.log("getTrendingMovies -->", loadingMovies);
   }, [loadingMovies]);
 
   useEffect(() => {
-    console.log("Movies -->", movies.length);
-  }, [movies.length]);
+    console.log("trending -->", trending.length);
+  }, [trending.length]);
 
   const handlerLoadMorePopularMovies = useCallback(() => {
-    let moviesLength = movies.length;
+    let moviesLength = trending.length;
     // falta uma variavel na api para saber se tem mais para loading ou nao...
     // por isso irei colocar um maximo no length de movies
     if (moviesLength >= LIMIT_MOVIES) {
@@ -46,16 +52,16 @@ export const TrendingScreen = () => {
       setIsEndList(true);
       return;
     } else {
-      getPopularMovies(page + 1);
+      getTrendingMovies(page + 1);
       setPage((prev) => prev + 1);
     }
-  }, [page, getPopularMovies, movies.length]);
+  }, [page, getTrendingMovies, trending.length]);
 
   return (
     <Container>
       {/* CABEÇALHO DO CONTEÚDO */}
       <SectionPrimary>
-        <TitleSectionPrimary>Lista de filmes {moviesName}</TitleSectionPrimary>
+        <TitleSectionPrimary>Lista de filmes</TitleSectionPrimary>
         <Button title="Popular" onPress={() => {}} />
         <Button title="Trending" onPress={() => {}} />
       </SectionPrimary>
@@ -64,20 +70,22 @@ export const TrendingScreen = () => {
         <FlatList
           style={{}}
           contentContainerStyle={{}}
-          data={loadingMovies ? FAKE_MOVIES : movies}
+          data={loadingMovies ? FAKE_MOVIES : trending}
           renderItem={({ item }) => (
             <FlatlistContainer>
               {loadingMovies ? (
                 <Skeleton borderRadius={5} />
               ) : (
-                <TitleSectionPrimary> {item.title} </TitleSectionPrimary>
+                <TitleSectionPrimary> {item.movie.title} </TitleSectionPrimary>
               )}
             </FlatlistContainer>
           )}
-          // keyExtractor={(item) =>
-          //   loadingMovies ? item.toString() : item.ids.slug || item.title
-          // }
-          // onEndReached={handlerLoadMorePopularMovies}
+          keyExtractor={(item) =>
+            loadingMovies
+              ? item.toString()
+              : item.movie.ids.slug + item.movie.ids.trakt
+          }
+          onEndReached={handlerLoadMorePopularMovies}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
             loadingMovies ? (

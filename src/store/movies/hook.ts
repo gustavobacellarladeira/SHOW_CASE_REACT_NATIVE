@@ -22,15 +22,8 @@ const promiseHelper = async (
 
 export const useMovies = () => {
   const store = useSelector((state: any) => state.movies);
-  const { loading, movies, name, popular, trending } = store;
+  const { loading, name, popular, trending } = store;
   const dispatch = useDispatch();
-
-  // const refleshMovies = async (page = 1, type = "") => {
-  //   dispatch({ type: "SET_LOADING", payload: true });
-  //   Promise.resolve([dispatch(getMovies(page, type))]).then(() => {
-  //     dispatch({ type: "SET_LOADING", payload: false });
-  //   });
-  // };
 
   const getPopularMovies = async (page = 1) =>
     promiseHelper(dispatch, getMoviesPopular(page));
@@ -39,16 +32,20 @@ export const useMovies = () => {
     promiseHelper(dispatch, getMoviesTrending(page));
   };
 
-  const setMovies = async (movies: number) => {
-    dispatch({ type: "SET_MOVIES", payload: movies });
-  };
+  // useEffect(() => {
+  //   try {
+  //     Promise.all([getPopularMovies(), getTrendingMovies()]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return {
     popular: popular,
     trending: trending,
     movies: name,
-    setMovies,
     loadingMovies: loading,
     getPopularMovies,
+    getTrendingMovies,
   };
 };

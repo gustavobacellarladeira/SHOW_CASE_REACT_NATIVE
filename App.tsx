@@ -5,7 +5,7 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
-import { SafeAreaComponent } from "./src/components";
+import { SafeAreaComponent, Skeleton } from "./src/components";
 import { Provider, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { store } from "./src/store";

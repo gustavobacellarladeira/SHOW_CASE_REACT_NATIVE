@@ -75,7 +75,7 @@ export const PopularScreen = () => {
             </FlatlistContainer>
           )}
           keyExtractor={(item) =>
-            (loadingMovies ? item.toString() : item.title) + "popúlar"
+            loadingMovies ? item.toString() : item.ids.slug + item.ids.trakt
           }
           onEndReached={handlerLoadMorePopularMovies}
           onEndReachedThreshold={0.5}
