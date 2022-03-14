@@ -29,6 +29,7 @@ export const ThemeScreen = () => {
 
         <Text testID="isEnabled">{isEnabled}</Text>
         <Switch
+          testID="switchTheme"
           trackColor={{
             false: theme.colors.primary,
             true: theme.colors.primary,

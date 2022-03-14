@@ -2,7 +2,7 @@ import { store } from "../../store/store";
 import React from "react";
 import { Provider } from "react-redux";
 import { ThemeScreen } from "./ThemeScreen";
-import { render } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import { ThemeProvider, DefaultTheme } from "styled-components";
 
 const MOCK_THEME: DefaultTheme = {
@@ -37,18 +37,23 @@ const rendererWithRedux = (component: any) => {
 
 describe("ThemeScreen testing...", () => {
   it("renders correctly", () => {
-    rendererWithRedux(<ThemeScreen />);
+    const tree = rendererWithRedux(<ThemeScreen />);
+    expect(tree.toJSON()).toMatchSnapshot();
   });
 
   it("isEnabled correctly", () => {
     const { getByTestId } = rendererWithRedux(<ThemeScreen />);
-    const isEnabled = getByTestId("isEnabled");
-    expect(isEnabled).toBeTruthy();
+    const isEnabledComp = getByTestId("isEnabled");
+    expect(isEnabledComp).toBeTruthy();
   });
 
-  //   it("isEnabled true or false", () => {
-  //     const isEnabledElement = tree.findByProps({ testeId: "isEnabled" }).props.value;
-  //     expect(tree.findByProps({testeId: "isEnabled"}).children).toEqual(true);
-  //     expect(isEnabledElement).
-  //   });
+  it("Switch has to change isEnable", () => {
+    const { getByTestId } = rendererWithRedux(<ThemeScreen />);
+    const switchComp = getByTestId("switchTheme");
+    console.log("switchComp VALUE-->", switchComp.props.value);
+    // testar o switch ativando a função da props dele switchComp.props.onChange e verificar se o valor do isEnabledComp mudou
+    fireEvent.press(switchComp);
+    const isEnabledComp = getByTestId("isEnabled");
+    expect(isEnabledComp).toBeTruthy();
+  });
 });

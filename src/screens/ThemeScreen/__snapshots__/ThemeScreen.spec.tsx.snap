@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThemeScreen testing... renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#000",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#000",
+          "height": "10%",
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontSize": 20,
+            "textAlign": "left",
+          },
+        ]
+      }
+    >
+      Popular Movies
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#000",
+          "flexBasis": 0,
+          "flexDirection": "row",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "justifyContent": "space-between",
+          "paddingBottom": 20,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 20,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontSize": 20,
+            "textAlign": "left",
+          },
+        ]
+      }
+    >
+      Change Theme
+    </Text>
+    <Text
+      testID="isEnabled"
+    />
+    <RCTSwitch
+      accessibilityRole="switch"
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#222831"
+      style={
+        Array [
+          Object {
+            "height": 31,
+            "width": 51,
+          },
+          Object {
+            "backgroundColor": "#3e3e3e",
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="switchTheme"
+      thumbTintColor="#222831"
+      tintColor="#222831"
+      value={false}
+    />
+  </View>
+</View>
+`;
