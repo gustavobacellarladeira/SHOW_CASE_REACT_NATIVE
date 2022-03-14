@@ -11,20 +11,15 @@ import {
 
 import {
   Container,
-  ContainerSection,
   EmptyList,
   EmptyListText,
   EndList,
-  EndLisText,
   EndListText,
   FlatListCard,
   FlatlistContainer,
-  ImageContainer,
   SectionPrimary,
   SectionSecondary,
-  SkeletonContainer,
   TitleFlatlist,
-  TitleFlatlistContainer,
   TitleSectionPrimary,
 } from "./Styles";
 
@@ -129,5 +124,3 @@ export const PopularScreen = () => {
     </Container>
   );
 };
-
-// <TitleSectionPrimary> {item.title} </TitleSectionPrimary>

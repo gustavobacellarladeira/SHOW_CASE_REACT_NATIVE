@@ -1,4 +1,3 @@
-import { getImage } from "../../services/images/images";
 import React, { useState } from "react";
 import { Switch } from "react-native";
 import { useTheme } from "styled-components";

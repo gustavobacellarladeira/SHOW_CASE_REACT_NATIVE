@@ -133,5 +133,3 @@ export const TrendingScreen = () => {
     </Container>
   );
 };
-
-// <TitleSectionPrimary> {item.title} </TitleSectionPrimary>
