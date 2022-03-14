@@ -23,22 +23,22 @@ import { Skeleton } from "../../components";
 import { useMovies } from "../../store/movies/hook";
 import { FAKE_MOVIES, LIMIT_MOVIES } from "../../constants/movies";
 
-export const PopularScreen = () => {
-  const { popular, loadingMovies, getPopularMovies } = useMovies();
+export const TrendingScreen = () => {
+  const { movies, loadingMovies, moviesName, getPopularMovies } = useMovies();
   const [page, setPage] = useState<number>(1);
   const [isEndList, setIsEndList] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("Movies -->", popular.length);
+    console.log("Movies -->", movies.length);
     console.log("loadingMoviesMovies -->", loadingMovies);
   }, [loadingMovies]);
 
   useEffect(() => {
-    console.log("Movies -->", popular.length);
-  }, [popular.length]);
+    console.log("Movies -->", movies.length);
+  }, [movies.length]);
 
   const handlerLoadMorePopularMovies = useCallback(() => {
-    let moviesLength = popular.length;
+    let moviesLength = movies.length;
     // falta uma variavel na api para saber se tem mais para loading ou nao...
     // por isso irei colocar um maximo no length de movies
     if (moviesLength >= LIMIT_MOVIES) {
@@ -49,13 +49,13 @@ export const PopularScreen = () => {
       getPopularMovies(page + 1);
       setPage((prev) => prev + 1);
     }
-  }, [page, getPopularMovies, popular.length]);
+  }, [page, getPopularMovies, movies.length]);
 
   return (
     <Container>
       {/* CABEÇALHO DO CONTEÚDO */}
       <SectionPrimary>
-        <TitleSectionPrimary>Lista de filmes </TitleSectionPrimary>
+        <TitleSectionPrimary>Lista de filmes {moviesName}</TitleSectionPrimary>
         <Button title="Popular" onPress={() => {}} />
         <Button title="Trending" onPress={() => {}} />
       </SectionPrimary>
@@ -64,7 +64,7 @@ export const PopularScreen = () => {
         <FlatList
           style={{}}
           contentContainerStyle={{}}
-          data={loadingMovies ? FAKE_MOVIES : popular}
+          data={loadingMovies ? FAKE_MOVIES : movies}
           renderItem={({ item }) => (
             <FlatlistContainer>
               {loadingMovies ? (
@@ -74,10 +74,10 @@ export const PopularScreen = () => {
               )}
             </FlatlistContainer>
           )}
-          keyExtractor={(item) =>
-            (loadingMovies ? item.toString() : item.title) + "popúlar"
-          }
-          onEndReached={handlerLoadMorePopularMovies}
+          // keyExtractor={(item) =>
+          //   loadingMovies ? item.toString() : item.ids.slug || item.title
+          // }
+          // onEndReached={handlerLoadMorePopularMovies}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
             loadingMovies ? (

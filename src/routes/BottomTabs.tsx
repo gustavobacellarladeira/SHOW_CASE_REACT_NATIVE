@@ -2,7 +2,11 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import { PopularScreen, MovieScreen } from "../screens";
-import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  FontAwesome5,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
@@ -28,6 +32,16 @@ export const BottomTabs = () => {
                 color={color}
               />
             );
+          },
+        }}
+      />
+      <Screen
+        name="Trending"
+        component={PopularScreen}
+        options={{
+          tabBarLabel: "Trending",
+          tabBarIcon: ({ focused, color, size }) => {
+            return <MaterialIcons name="trending-up" size={24} color={color} />;
           },
         }}
       />
