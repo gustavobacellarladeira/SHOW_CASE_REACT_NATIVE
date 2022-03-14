@@ -19,5 +19,6 @@
     "paths": {
       "@src/*": ["./src/*"]
     }
-  }
+  },
+  "types": ["jest", "styled-components-react-native"]
 }
