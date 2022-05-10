@@ -14,9 +14,6 @@ export const PlaylistScreen: React.FC<PlaylistScreenProps> = () => {
     initialPlaylist: FAKE_VIDEO_LIST,
   });
 
-  useEffect(() => {
-    console.log("currentVideo", currentVideo);
-  }, []);
   //
   return (
     <View style={styles.container}>
