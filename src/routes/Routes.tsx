@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { BottomTabs } from "./BottomTabs";
 import { Button, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { PlaylistScreen } from "../screens/PlaylistScreen/PlaylistScreen";
 
 export const Routes = () => {
   return (
@@ -45,8 +46,10 @@ const RootStack = createNativeStackNavigator();
 
 function RootStackScreen() {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator initialRouteName="PlaylistScreen">
       <RootStack.Group>
+        <RootStack.Screen name="PlaylistScreen" component={PlaylistScreen} />
+
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="Details" component={DetailsScreen} />
       </RootStack.Group>
