@@ -17,7 +17,6 @@ export const useVideoPlayList = (props: {
   //
   const [playlistIndex, setPlaylistIndex] = useState(1);
   const [playlistLength, setPlaylistLength] = useState(initialPlaylist.length);
-
   //
   const [initialVideo, setInitialVideo] = useState(hasInitialVideo ?? 0); // initialVideo is the first video to play
   //
@@ -64,7 +63,7 @@ export const useVideoPlayList = (props: {
    *@memberof useVideoPlayList
 
    */
-  const previusVideo = () => {
+  const previousVideo = () => {
     if (initialVideo > 0) {
       setInitialVideo(initialVideo - 1);
       setCurrentVideo(playlist[initialVideo - 1]);
@@ -72,13 +71,21 @@ export const useVideoPlayList = (props: {
     }
   };
 
+  interface UseVideoPlayListProps {
+    playlist: FakePlaylistProps[];
+    setPlaylist: (playlist: FakePlaylistProps[]) => void;
+    setCurrentVideo: (currentVideo: FakePlaylistProps) => void;
+    currentVideo: FakePlaylistProps;
+    nextVideo: () => void;
+    previousVideo: () => void;
+  }
+
   return {
+    setCurrentVideo,
     currentVideo,
     nextVideo,
-    previusVideo,
+    previousVideo,
     playlist,
     setPlaylist,
-    setInitialVideo,
-    initialVideo,
-  };
+  } as UseVideoPlayListProps;
 };

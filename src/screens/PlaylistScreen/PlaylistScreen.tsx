@@ -10,7 +10,7 @@ export const PlaylistScreen: React.FC<PlaylistScreenProps> = () => {
   const [status, setStatus] = useState({});
   //
 
-  const { currentVideo, nextVideo, previusVideo } = useVideoPlayList({
+  const { currentVideo, nextVideo, previousVideo } = useVideoPlayList({
     initialPlaylist: FAKE_VIDEO_LIST,
   });
 
@@ -41,7 +41,7 @@ export const PlaylistScreen: React.FC<PlaylistScreenProps> = () => {
         <Button
           title={"Anterior"}
           onPress={() => {
-            previusVideo();
+            previousVideo();
           }}
         />
         <Button
